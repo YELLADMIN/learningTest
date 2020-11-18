@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using CkTools.FP;
 
 namespace System
 {
@@ -48,17 +49,9 @@ namespace System
             [NotNull] Func<TInput, bool> isExecute,
             [NotNull] Func<TInput, TInput> func)
         {
-            isExecute.CheckNullWithException(nameof(isExecute));
-            func.CheckNullWithException(nameof(func));
+            Func<TInput, TInput> ifMethod = CkFunctions.IfCurrying<TInput>()(t => t)(func)(isExecute)();
 
-            if (isExecute(input))
-            {
-                return func(input);
-            }
-            else
-            {
-                return input;
-            }
+            return ifMethod(input);
         }
 
         /// <summary>

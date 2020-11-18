@@ -66,11 +66,6 @@ namespace System
                 ({ HasValue: true }, _) => bindFunc(input.Value),
                 _ => Maybe<B>.Nothing(),
             };
-            //return input switch
-            //{
-            //    { HasValue: true } => bindFunc(input.Value),
-            //    _ => Maybe<B>.Nothing(),
-            //};
         }
 
         #endregion 函数式扩展

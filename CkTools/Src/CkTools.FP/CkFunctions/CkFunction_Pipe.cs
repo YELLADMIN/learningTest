@@ -9,7 +9,49 @@ namespace CkTools.FP
     /// </summary>
     public static partial class CkFunctions
     {
-        #region 返回Action
+        #region 0个入参
+
+        /// <summary>
+        /// 管道 <para></para>
+        /// (void->void)->(void->void)->...  => (void->void) <para></para>
+        /// </summary>
+        /// <param name="sourceFunc"></param>
+        /// <param name="actions"></param>
+        /// <returns></returns>
+        public static Action Pipe(
+            [NotNull] Action sourceFunc,
+            [NotNull] params Action[] actions)
+        {
+            sourceFunc.CheckNullWithException(nameof(sourceFunc));
+            actions.CheckNullWithException(nameof(actions));
+
+            actions.For(t => sourceFunc += t);
+            return sourceFunc;
+        }
+
+        /// <summary>
+        /// 管道 <para></para>
+        /// (void->a)->(a->void)->...  => (void->a) <para></para>
+        /// </summary>
+        /// <param name="sourceFunc"></param>
+        /// <param name="actions"></param>
+        /// <returns></returns>
+        public static Func<TOutput> Pipe<TOutput>(
+            [NotNull] Func<TOutput> sourceFunc,
+            [NotNull] params Action<TOutput>[] actions)
+        {
+            sourceFunc.CheckNullWithException(nameof(sourceFunc));
+            actions.CheckNullWithException(nameof(actions));
+
+            return () =>
+            {
+                TOutput result = sourceFunc();
+                actions.For(t => t(result));
+                return result;
+            };
+        }
+
+        #endregion 0个入参
 
         #region 1个入参
 
@@ -29,10 +71,35 @@ namespace CkTools.FP
             sourceFunc.CheckNullWithException(nameof(sourceFunc));
             actions.CheckNullWithException(nameof(actions));
 
+            return input =>
+            {
+                sourceFunc(input);
+                actions.For(item => item(input));
+            };
+        }
+
+        /// <summary>
+        /// 管道 <para></para>
+        /// (a->b)->(b->void)->...  => (a->void) <para></para>
+        /// 示例:  (string->int)->(int->void)->...  => (string->void)
+        /// </summary>
+        /// <typeparam name="TInput"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="sourceFunc"></param>
+        /// <param name="funcs"></param>
+        /// <returns></returns>
+        public static Func<TInput, TResult> Pipe<TInput, TResult>(
+            [NotNull] Func<TInput, TResult> sourceFunc,
+            [NotNull] params Func<TResult, TResult>[] funcs)
+        {
+            sourceFunc.CheckNullWithException(nameof(sourceFunc));
+            funcs.CheckNullWithException(nameof(funcs));
+
             return t =>
             {
-                sourceFunc(t);
-                actions.For(item => item(t));
+                TResult tempResult = sourceFunc(t);
+                funcs.For(item => tempResult = item(tempResult));
+                return tempResult;
             };
         }
 
@@ -46,25 +113,21 @@ namespace CkTools.FP
         /// <param name="sourceFunc"></param>
         /// <param name="actions"></param>
         /// <returns></returns>
-        public static Action<TInput> Pipe<TInput, TResult>(
+        public static Func<TInput, TResult> Pipe<TInput, TResult>(
             [NotNull] Func<TInput, TResult> sourceFunc,
             [NotNull] params Action<TResult>[] actions)
         {
             sourceFunc.CheckNullWithException(nameof(sourceFunc));
             actions.CheckNullWithException(nameof(actions));
 
-            return t =>
+            return input =>
             {
-                TResult tempResult = sourceFunc(t);
+                TResult tempResult = sourceFunc(input);
                 actions.For(item => item(tempResult));
+
+                return tempResult;
             };
         }
-
-        #endregion 1个入参
-
-        #endregion 返回Action
-
-        #region 返回Func
 
         /// <summary>
         /// 管道 <para></para>
@@ -86,6 +149,6 @@ namespace CkTools.FP
             return t => func(sourceFunc(t));
         }
 
-        #endregion 返回Func
+        #endregion 1个入参
     }
 }

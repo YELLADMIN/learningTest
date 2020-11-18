@@ -12,7 +12,7 @@ namespace CKTols.FP.Test
         public void Action_CurryingTest1()
         {
             //导航
-            Fp_Currying_Extensions.Currying(intToVoid);
+            FP_Currying_Extensions.Currying(intToVoid);
 
             int tempResult = 0;
 
@@ -55,7 +55,7 @@ namespace CKTols.FP.Test
         public void CurryingTest1()
         {
             //导航
-            Fp_Currying_Extensions.Currying(intToString);
+            FP_Currying_Extensions.Currying(intToString);
 
             // (int->string)->1 => (()->string)
             Func<string> result = intToString.Currying()(1);

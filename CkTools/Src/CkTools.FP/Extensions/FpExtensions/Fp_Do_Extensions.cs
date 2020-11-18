@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System
 {
-    public static class Fp_Do_Extensions
+    public static class FP_Do_Extensions
     {
         #region 1个参数
 

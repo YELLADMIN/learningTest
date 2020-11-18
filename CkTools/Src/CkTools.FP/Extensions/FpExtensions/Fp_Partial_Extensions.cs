@@ -3,7 +3,7 @@
     /// <summary>
     /// 函数式扩展-分布函数
     /// </summary>
-    public static class Fp_Partial_Extensions
+    public static class FP_Partial_Extensions
     {
         #region Action
 

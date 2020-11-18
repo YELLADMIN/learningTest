@@ -3,7 +3,7 @@
     /// <summary>
     /// 函数式扩展-柯里化
     /// </summary>
-    public static class Fp_Currying_Extensions
+    public static class FP_Currying_Extensions
     {
         #region Action
 
@@ -52,10 +52,6 @@
 
         #region Func
 
-        //Func<SensorMessage,Action<byte[]> > -> Currying -> Func<SensorMessage, Func<Action<byte[]>>>
-        //Func<SensorMessage, Func<Action<byte[]>>>(XXX)
-        //Func<Action<byte[]>()
-        //Action<byte[]>
         public static Func<T1, Func<TResult>> Currying<T1, TResult>(
             this Func<T1, TResult> func)
         {

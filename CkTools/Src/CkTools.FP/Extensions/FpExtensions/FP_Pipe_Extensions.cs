@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
+using CkTools.FP;
 
 namespace System
 {
@@ -8,7 +8,23 @@ namespace System
     /// </summary>
     public static class FP_Pipe_Extensions
     {
-        #region 返回Action
+        #region 0个入参
+
+        /// <summary>
+        /// 管道 <para></para>
+        /// (void->void)->(void->void)->...  => (void->void) <para></para>
+        /// </summary>
+        /// <param name="sourceFunc"></param>
+        /// <param name="actions"></param>
+        /// <returns></returns>
+        public static Action Pipe(
+            [NotNull] this Action sourceFunc,
+            [NotNull] params Action[] actions)
+        {
+            return CkFunctions.Pipe(sourceFunc, actions);
+        }
+
+        #endregion 0个入参
 
         #region 1个入参
 
@@ -25,39 +41,31 @@ namespace System
             [NotNull] this Action<TInput> sourceFunc,
             [NotNull] params Action<TInput>[] actions)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
-
-            return t =>
-            {
-                sourceFunc(t);
-                actions.For(item => item(t));
-            };
+            return CkFunctions.Pipe(sourceFunc, actions);
         }
 
-        /// <summary>
-        /// 管道 <para></para>
-        /// (a->b)->(b->void)->...  => (a->void) <para></para>
-        /// 示例:  (string->int)->(int->void)->...  => (string->void)
-        /// </summary>
-        /// <typeparam name="TInput"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
-        /// <returns></returns>
-        public static Action<TInput> Pipe<TInput, TResult>(
-            [NotNull] this Func<TInput, TResult> sourceFunc,
-            [NotNull] params Action<TResult>[] actions)
-        {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+        #endregion 1个入参
 
-            return t =>
-            {
-                TResult tempResult = sourceFunc(t);
-                actions.For(item => item(tempResult));
-            };
-        }
+        #region 返回Action
+
+        #region 1个入参
+
+        ///// <summary>
+        ///// 管道 <para></para>
+        ///// (a->b)->(b->void)->...  => (a->void) <para></para>
+        ///// 示例:  (string->int)->(int->void)->...  => (string->void)
+        ///// </summary>
+        ///// <typeparam name="TInput"></typeparam>
+        ///// <typeparam name="TResult"></typeparam>
+        ///// <param name="sourceFunc"></param>
+        ///// <param name="actions"></param>
+        ///// <returns></returns>
+        //public static Action<TInput> Pipe<TInput, TResult>(
+        //    [NotNull] this Func<TInput, TResult> sourceFunc,
+        //    [NotNull] params Action<TResult>[] actions)
+        //{
+        //    return CkFunctions.Pipe(sourceFunc, actions);
+        //}
 
         #endregion 1个入参
 
@@ -80,10 +88,7 @@ namespace System
           [NotNull] this Func<TInput, TCenter> sourceFunc,
           [NotNull] Func<TCenter, TResult> func)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            func.CheckNullWithException(nameof(func));
-
-            return t => func(sourceFunc(t));
+            return CkFunctions.Pipe(sourceFunc, func);
         }
 
         #endregion 返回Func
