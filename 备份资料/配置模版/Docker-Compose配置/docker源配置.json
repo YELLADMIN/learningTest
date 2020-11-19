@@ -4,7 +4,8 @@
    "http://registry.docker-cn.com",
    "http://docker.mirrors.ustc.edu.cn",
    "http://hub-mirror.c.163.com",
-   "https://5hh8258g.mirror.aliyuncs.com"
+   "https://5hh8258g.mirror.aliyuncs.com",
+   "https://mcr.azk8s.cn"
  ],
  "insecure-registries" : [
    "registry.docker-cn.com",

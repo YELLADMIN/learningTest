@@ -26,7 +26,7 @@ services:
         resources: #资源限制
             limits: #配置极限允许的资源
                 cpus: '1'
-                memory: 1000M
+                memory: 500M
             reservations: #配置要申请的资源
                 cpus: '0.5'
                 memory: 200M
