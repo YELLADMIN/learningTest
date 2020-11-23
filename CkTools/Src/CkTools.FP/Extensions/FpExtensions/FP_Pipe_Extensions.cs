@@ -13,14 +13,14 @@ namespace System
         /// <summary>
         /// 管道
         /// </summary>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Action Pipe(
-            [NotNull] this Action sourceFunc,
-            [NotNull] params Action[] actions)
+            [NotNull] this Action sourceExp,
+            [NotNull] params Action[] exps)
         {
-            return CkFunctions.Pipe(sourceFunc, actions);
+            return CkFunctions.Pipe(sourceExp, exps);
         }
 
         #endregion 0个入参
@@ -31,14 +31,14 @@ namespace System
         /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Action<TInput> Pipe<TInput>(
-            [NotNull] this Action<TInput> sourceFunc,
-            [NotNull] params Action<TInput>[] actions)
+            [NotNull] this Action<TInput> sourceExp,
+            [NotNull] params Action<TInput>[] exps)
         {
-            return CkFunctions.Pipe(sourceFunc, actions);
+            return CkFunctions.Pipe(sourceExp, exps);
         }
 
         #endregion 1个入参
@@ -54,14 +54,14 @@ namespace System
         ///// </summary>
         ///// <typeparam name="TInput"></typeparam>
         ///// <typeparam name="TResult"></typeparam>
-        ///// <param name="sourceFunc"></param>
-        ///// <param name="actions"></param>
+        ///// <param name="sourceExp"></param>
+        ///// <param name="exps"></param>
         ///// <returns></returns>
         //public static Action<TInput> Pipe<TInput, TResult>(
-        //    [NotNull] this Func<TInput, TResult> sourceFunc,
-        //    [NotNull] params Action<TResult>[] actions)
+        //    [NotNull] this Func<TInput, TResult> sourceExp,
+        //    [NotNull] params Action<TResult>[] exps)
         //{
-        //    return CkFunctions.Pipe(sourceFunc, actions);
+        //    return CkFunctions.Pipe(sourceExp, exps);
         //}
 
         #endregion 1个入参
@@ -76,14 +76,14 @@ namespace System
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TCenter"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="func"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exp"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Pipe<TInput, TCenter, TResult>(
-          [NotNull] this Func<TInput, TCenter> sourceFunc,
-          [NotNull] Func<TCenter, TResult> func)
+          [NotNull] this Func<TInput, TCenter> sourceExp,
+          [NotNull] Func<TCenter, TResult> exp)
         {
-            return CkFunctions.Pipe(sourceFunc, func);
+            return CkFunctions.Pipe(sourceExp, exp);
         }
 
         #endregion 返回Func

@@ -13,34 +13,34 @@ namespace System
         /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="action"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exp"></param>
         /// <returns></returns>
         public static Action<TInput> Do<TInput>(
-            [NotNull] this Action<TInput> sourceFunc,
-            [NotNull] Action<TInput> action)
+            [NotNull] this Action<TInput> sourceExp,
+            [NotNull] Action<TInput> exp)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            action.CheckNullWithException(nameof(action));
-            sourceFunc += action;
-            return sourceFunc;
+            sourceExp.CheckNullWithException(nameof(sourceExp));
+            exp.CheckNullWithException(nameof(exp));
+            sourceExp += exp;
+            return sourceExp;
         }
 
         /// <summary>
         /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Action<TInput> Do<TInput>(
-            [NotNull] this Action<TInput> sourceFunc,
-            [NotNull] params Action<TInput>[] actions)
+            [NotNull] this Action<TInput> sourceExp,
+            [NotNull] params Action<TInput>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
-            actions.For(t => sourceFunc += t);
-            return sourceFunc;
+            sourceExp.CheckNullWithException(nameof(sourceExp));
+            exps.CheckNullWithException(nameof(exps));
+            exps.For(t => sourceExp += t);
+            return sourceExp;
         }
 
         #endregion Action
@@ -52,20 +52,20 @@ namespace System
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="action"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exp"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Do<TInput, TResult>(
-            [NotNull] this Func<TInput, TResult> sourceFunc,
-            [NotNull] Action<TResult> action)
+            [NotNull] this Func<TInput, TResult> sourceExp,
+            [NotNull] Action<TResult> exp)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            action.CheckNullWithException(nameof(action));
+            sourceExp.CheckNullWithException(nameof(sourceExp));
+            exp.CheckNullWithException(nameof(exp));
 
             return t =>
             {
-                TResult result = sourceFunc(t);
-                action(result);
+                TResult result = sourceExp(t);
+                exp(result);
                 return result;
             };
         }
@@ -75,20 +75,20 @@ namespace System
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="sourceExp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Do<TInput, TResult>(
-            [NotNull] this Func<TInput, TResult> sourceFunc,
-            [NotNull] params Action<TResult>[] actions)
+            [NotNull] this Func<TInput, TResult> sourceExp,
+            [NotNull] params Action<TResult>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+            sourceExp.CheckNullWithException(nameof(sourceExp));
+            exps.CheckNullWithException(nameof(exps));
 
             return t =>
             {
-                TResult result = sourceFunc(t);
-                actions.For(item => item(result));
+                TResult result = sourceExp(t);
+                exps.For(item => item(result));
                 return result;
             };
         }
