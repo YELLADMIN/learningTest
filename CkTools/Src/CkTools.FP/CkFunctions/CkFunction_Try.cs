@@ -8,7 +8,7 @@ namespace CkTools.FP
     /// </summary>
     public static partial class CkFunctions
     {
-        #region Action
+        #region Action - 0入参 0出参
 
         /// <summary>
         /// Try
@@ -26,6 +26,10 @@ namespace CkTools.FP
             handler.CheckNullWithException(nameof(handler));
             return () => { try { action(); } catch (Exception ex) { handler(ex); } };
         }
+
+        #endregion Action - 0入参 0出参
+
+        #region Action - 1入参 0出参
 
         /// <summary>
         /// Try
@@ -61,9 +65,9 @@ namespace CkTools.FP
             return CkFunctions.Try(action, (input, ex) => handler(ex));
         }
 
-        #endregion Action
+        #endregion Action - 1入参 0出参
 
-        #region Func - 0入参
+        #region Func - 0入参 1出参
 
         /// <summary>
         /// Try
@@ -99,7 +103,9 @@ namespace CkTools.FP
             return CkFunctions.Try(func, ex => { handler(ex); throw ex; });
         }
 
-        #endregion Func - 0入参
+        #endregion Func - 0入参 1出参
+
+        #region Func - 1入参 1出参
 
         /// <summary>
         /// Try
@@ -119,5 +125,7 @@ namespace CkTools.FP
             handler.CheckNullWithException(nameof(handler));
             return input => { try { return func(input); } catch (Exception ex) { return handler(input, ex); } };
         }
+
+        #endregion Func - 1入参 1出参
     }
 }

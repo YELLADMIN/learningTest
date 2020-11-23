@@ -10,9 +10,7 @@ namespace System
         #region Action
 
         /// <summary>
-        /// 管道 <para></para>
-        /// 适合： (a->void)->(a->void) => (a->void) <para></para>
-        /// 示例:  (string->void)->(string->void) => (string->void)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <param name="sourceFunc"></param>
@@ -29,9 +27,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// 适合： (a->void)->(a->void)->...  => (a->void) <para></para>
-        /// 示例:  (string->void)->(string->void)->...  => (string->void)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <param name="sourceFunc"></param>
@@ -52,9 +48,7 @@ namespace System
         #region Func
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (a->b)->(b->void) => (a->b) <para></para>
-        /// 示例： (string->int)->(int->void) => (string->int)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -77,9 +71,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (a->b)->(b->void)->... => (a->b) <para></para>
-        /// 示例： (string->int)->(int->void)->... => (string->int)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>

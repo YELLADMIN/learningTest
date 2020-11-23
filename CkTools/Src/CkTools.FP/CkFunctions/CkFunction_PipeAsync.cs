@@ -13,8 +13,7 @@ namespace CkTools.FP
         #region 0个入参
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (void->void)->(void->void)->...  => (void->void) <para></para>
+        /// 管道
         /// </summary>
         /// <param name="sourceFunc"></param>
         /// <param name="funcs"></param>
@@ -41,8 +40,7 @@ namespace CkTools.FP
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (void->a)->(a->void)->...  => (void->a) <para></para>
+        /// 管道
         /// </summary>
         /// <typeparam name="TOutput"></typeparam>
         /// <param name="sourceFunc"></param>
@@ -83,9 +81,7 @@ namespace CkTools.FP
         #region 1个入参
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (a->void)->(a->void)->...  => (a->void) <para></para>
-        /// 示例:  (string->void)->(string->void)->...  => (string->void)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <param name="sourceFunc"></param>
@@ -113,9 +109,7 @@ namespace CkTools.FP
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (a->b)->(b->b)->...  => (a->b) <para></para>
-        /// 示例:  (string->int)->(int->int)->...  => (string->int)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -151,9 +145,7 @@ namespace CkTools.FP
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (a->b)->(b->void)->...  => (a->b) <para></para>
-        /// 示例:  (string->int)->(int->void)->...  => (string->int)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -194,9 +186,7 @@ namespace CkTools.FP
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// (a->b)->(b->c) => (a->c) <para></para>
-        /// 示例： (string->int)->(int->bool) => (string->bool)
+        /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TCenter"></typeparam>

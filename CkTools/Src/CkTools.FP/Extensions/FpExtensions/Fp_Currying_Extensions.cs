@@ -7,29 +7,12 @@
     {
         #region Action
 
-        /// <summary>
-        /// 柯里化<para></para>
-        /// (a->void) => (a->(()->void)) <para></para>
-        /// 示例： (int->void) => (int->(()->void))
-        /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <param name="action"></param>
-        /// <returns></returns>
         public static Func<T1, Action> Currying<T1>(
             this Action<T1> action)
         {
             return x => () => action(x);
         }
 
-        /// <summary>
-        /// 柯里化<para></para>
-        /// (a->b->void) => (a->(b->(()->void))) <para></para>
-        /// 示例： (int->string->void) => (int->(string->(()->void)))
-        /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <param name="action"></param>
-        /// <returns></returns>
         public static Func<T1, Func<T2, Action>> Currying<T1, T2>(
             this Action<T1, T2> action)
         {
@@ -77,7 +60,5 @@
         }
 
         #endregion Func
-
-        //todo: 后续还有东西没理解：https://zhuanlan.zhihu.com/p/94591842
     }
 }

@@ -9,9 +9,7 @@ namespace CkTools.FP
     public static partial class CkFunctions
     {
         /// <summary>
-        /// 选择器 <para></para>
-        /// (a->b)->(b->byte)->(b->c)->...=> (a->c) <para></para>
-        /// 示例： (string->int)->(int->byte)->(int->bool).... => (string->bool)
+        /// 选择器
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TCenter"></typeparam>

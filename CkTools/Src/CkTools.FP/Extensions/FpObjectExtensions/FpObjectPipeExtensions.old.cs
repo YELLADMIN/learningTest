@@ -5,9 +5,7 @@ namespace System
     public static partial class FpObjectPipeExtensions
     {
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->bool)->(b->c) => c <para></para>
-        /// 示例： string->(string->bool)->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -27,9 +25,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(()->bool)->(b->c) => c <para></para>
-        /// 示例： string->(string->bool)->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>

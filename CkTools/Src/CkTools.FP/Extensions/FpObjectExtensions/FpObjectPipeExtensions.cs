@@ -8,9 +8,7 @@ namespace System
         #region Pipe
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->b) => b <para></para>
-        /// 示例： string->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -33,9 +31,7 @@ namespace System
         #region PipeIf
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->bool)->(a->a) => a <para></para>
-        /// 示例： string->(string->bool)->(string->string) => string
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -49,15 +45,11 @@ namespace System
             [NotNull] Func<TInput, bool> isExecute,
             [NotNull] Func<TInput, TInput> func)
         {
-            Func<TInput, TInput> ifMethod = CkFunctions.IfCurrying<TInput>()(t => t)(func)(isExecute)();
-
-            return ifMethod(input);
+            return CkFunctions.PipeIf<TInput>(func, isExecute)(input);
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->bool->(a->a) => a <para></para>
-        /// 示例： string->bool->(string->string)=> string
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -80,9 +72,7 @@ namespace System
         #region TryPipe
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->b) => b <para></para>
-        /// 示例：string->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -111,9 +101,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->b) => b <para></para>
-        /// 示例：string->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -136,9 +124,7 @@ namespace System
         #region TryPipeIf
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->bool)->(a->a)->(a->Exception->a) => a <para></para>
-        /// 示例： string->(string->bool)->(string->string)->(string->Exception->string) => string
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -168,9 +154,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->bool->(a->a) => a <para></para>
-        /// 示例： string->->bool->(string->string) => string
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -199,9 +183,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->bool)->(b->c) => c <para></para>
-        /// 示例： string->(string->bool)->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
@@ -221,9 +203,7 @@ namespace System
         }
 
         /// <summary>
-        /// 管道 <para></para>
-        /// a->(a->bool)->(b->c) => c <para></para>
-        /// 示例： string->(string->bool)->(string->int) => int
+        /// 管道
         /// </summary>
         /// <Value>
         /// <para><paramref name="input"/>：要处理的值 </para>
