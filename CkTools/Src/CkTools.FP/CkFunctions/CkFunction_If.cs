@@ -16,22 +16,22 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <returns></returns>
         public static Action If<TInput>(
             [NotNull] Action exp2,
             [NotNull] Action exp1,
-            [NotNull] Func<bool> isExecute)
+            [NotNull] Func<bool> judgeExp)
         {
             exp2.CheckNullWithException(nameof(exp2));
             exp1.CheckNullWithException(nameof(exp1));
-            isExecute.CheckNullWithException(nameof(isExecute));
+            judgeExp.CheckNullWithException(nameof(judgeExp));
 
             return () =>
             {
-                if (isExecute())
+                if (judgeExp())
                 {
                     exp1();
                 }
@@ -52,22 +52,22 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <returns></returns>
         public static Action<TInput> If<TInput>(
             [NotNull] Action<TInput> exp2,
             [NotNull] Action<TInput> exp1,
-            [NotNull] Func<TInput, bool> isExecute)
+            [NotNull] Func<TInput, bool> judgeExp)
         {
             exp2.CheckNullWithException(nameof(exp2));
             exp1.CheckNullWithException(nameof(exp1));
-            isExecute.CheckNullWithException(nameof(isExecute));
+            judgeExp.CheckNullWithException(nameof(judgeExp));
 
             return t =>
             {
-                if (isExecute(t))
+                if (judgeExp(t))
                 {
                     exp1(t);
                 }
@@ -84,18 +84,18 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <returns></returns>
         public static Action<TInput> If<TInput>(
             [NotNull] Action<TInput> exp2,
             [NotNull] Action exp1,
-            [NotNull] Func<TInput, bool> isExecute)
+            [NotNull] Func<TInput, bool> judgeExp)
         {
             exp1.CheckNullWithException(nameof(exp1));
 
-            return CkFunctions.If<TInput>(exp2, t => exp1(), isExecute);
+            return CkFunctions.If<TInput>(exp2, t => exp1(), judgeExp);
         }
 
         /// <summary>
@@ -104,18 +104,18 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <returns></returns>
         public static Action<TInput> If<TInput>(
             [NotNull] Action<TInput> exp2,
             [NotNull] Action<TInput> exp1,
-            [NotNull] Func<bool> isExecute)
+            [NotNull] Func<bool> judgeExp)
         {
-            isExecute.CheckNullWithException(nameof(isExecute));
+            judgeExp.CheckNullWithException(nameof(judgeExp));
 
-            return CkFunctions.If<TInput>(exp2, exp1, t => isExecute());
+            return CkFunctions.If<TInput>(exp2, exp1, t => judgeExp());
         }
 
         #endregion Action - 1入参 0出参
@@ -128,20 +128,20 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TOutput"></typeparam>
         /// <returns></returns>
         public static Func<TOutput> If<TOutput>(
             [NotNull] Func<TOutput> exp2,
             [NotNull] Func<TOutput> exp1,
-            [NotNull] Func<bool> isExecute)
+            [NotNull] Func<bool> judgeExp)
         {
             exp2.CheckNullWithException(nameof(exp2));
             exp1.CheckNullWithException(nameof(exp1));
-            isExecute.CheckNullWithException(nameof(isExecute));
+            judgeExp.CheckNullWithException(nameof(judgeExp));
 
-            return () => isExecute()
+            return () => judgeExp()
             ? exp1()
             : exp2();
         }
@@ -156,7 +156,7 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TOutput"></typeparam>
@@ -164,13 +164,13 @@ namespace CkTools.FP
         public static Func<TInput, TOutput> If<TInput, TOutput>(
             [NotNull] Func<TInput, TOutput> exp2,
             [NotNull] Func<TInput, TOutput> exp1,
-            [NotNull] Func<TInput, bool> isExecute)
+            [NotNull] Func<TInput, bool> judgeExp)
         {
             exp2.CheckNullWithException(nameof(exp2));
             exp1.CheckNullWithException(nameof(exp1));
-            isExecute.CheckNullWithException(nameof(isExecute));
+            judgeExp.CheckNullWithException(nameof(judgeExp));
 
-            return input => isExecute(input)
+            return input => judgeExp(input)
             ? exp1(input)
             : exp2(input);
         }
@@ -181,16 +181,16 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <returns></returns>
         public static Func<TInput, TInput> If<TInput>(
             [NotNull] Func<TInput, TInput> exp2,
             [NotNull] Func<TInput, TInput> exp1,
-            [NotNull] Func<TInput, bool> isExecute)
+            [NotNull] Func<TInput, bool> judgeExp)
         {
-            return CkFunctions.If<TInput, TInput>(exp2, exp1, isExecute);
+            return CkFunctions.If<TInput, TInput>(exp2, exp1, judgeExp);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace CkTools.FP
         /// <Value>
         /// <para><paramref name="exp2"/>：为false时执行的函数 </para>
         /// <para><paramref name="exp1"/> 为true时执行的函数 </para>
-        /// <para><paramref name="isExecute"/>：指示如何判断的函数 </para>
+        /// <para><paramref name="judgeExp"/>：指示如何判断的函数 </para>
         /// </Value>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TOutput"></typeparam>
@@ -207,10 +207,10 @@ namespace CkTools.FP
         public static Func<TInput, TOutput> If<TInput, TOutput>(
             [NotNull] Func<TInput, TOutput> exp2,
             [NotNull] Func<TInput, TOutput> exp1,
-            [NotNull] Func<bool> isExecute)
+            [NotNull] Func<bool> judgeExp)
         {
-            isExecute.CheckNullWithException(nameof(isExecute));
-            return CkFunctions.If<TInput, TOutput>(exp2, exp1, t => isExecute());
+            judgeExp.CheckNullWithException(nameof(judgeExp));
+            return CkFunctions.If<TInput, TOutput>(exp2, exp1, t => judgeExp());
         }
 
         #endregion Fun - 1入参 1出参

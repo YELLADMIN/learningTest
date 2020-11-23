@@ -14,14 +14,14 @@ namespace CkTools.FP
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TCenter"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="func1"></param>
-        /// <param name="func2"></param>
+        /// <param name="exp2"></param>
+        /// <param name="exp1"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Compose<TInput, TCenter, TResult>(
-            [NotNull] Func<TCenter, TResult> func2,
-            [NotNull] Func<TInput, TCenter> func1)
+            [NotNull] Func<TCenter, TResult> exp2,
+            [NotNull] Func<TInput, TCenter> exp1)
         {
-            return CkFunctions.Pipe(func1, func2);
+            return CkFunctions.Pipe(exp1, exp2);
         }
     }
 }

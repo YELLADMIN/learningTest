@@ -17,34 +17,34 @@ namespace CkTools.FP
         /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="action"></param>
+        /// <param name="exp2"></param>
+        /// <param name="exp1"></param>
         /// <returns></returns>
         public static Action<TInput> Do<TInput>(
-            [NotNull] Action<TInput> sourceFunc,
-            [NotNull] Action<TInput> action)
+            [NotNull] Action<TInput> exp2,
+            [NotNull] Action<TInput> exp1)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            action.CheckNullWithException(nameof(action));
-            sourceFunc += action;
-            return sourceFunc;
+            exp2.CheckNullWithException(nameof(exp2));
+            exp1.CheckNullWithException(nameof(exp1));
+            exp1 += exp2;
+            return exp1;
         }
 
         /// <summary>
         /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="exp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Action<TInput> Do<TInput>(
-            [NotNull] Action<TInput> sourceFunc,
-            [NotNull] params Action<TInput>[] actions)
+            [NotNull] Action<TInput> exp,
+            [NotNull] params Action<TInput>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
-            actions.For(t => sourceFunc += t);
-            return sourceFunc;
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
+            exps.For(t => exp += t);
+            return exp;
         }
 
         #endregion Action

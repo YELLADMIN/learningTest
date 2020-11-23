@@ -14,37 +14,37 @@ namespace CkTools.FP
         /// <summary>
         /// 管道
         /// </summary>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="exp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Action Pipe(
-            [NotNull] Action sourceFunc,
-            [NotNull] params Action[] actions)
+            [NotNull] Action exp,
+            [NotNull] params Action[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
 
-            actions.For(t => sourceFunc += t);
-            return sourceFunc;
+            exps.For(t => exp += t);
+            return exp;
         }
 
         /// <summary>
         /// 管道
         /// </summary>
-        /// <param name="sourceFunc"></param>
+        /// <param name="exp"></param>
         /// <param name="actions"></param>
         /// <returns></returns>
         public static Func<TOutput> Pipe<TOutput>(
-            [NotNull] Func<TOutput> sourceFunc,
-            [NotNull] params Action<TOutput>[] actions)
+            [NotNull] Func<TOutput> exp,
+            [NotNull] params Action<TOutput>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
 
             return () =>
             {
-                TOutput result = sourceFunc();
-                actions.For(t => t(result));
+                TOutput result = exp();
+                exps.For(t => t(result));
                 return result;
             };
         }
@@ -57,20 +57,20 @@ namespace CkTools.FP
         /// 管道
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="exp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Action<TInput> Pipe<TInput>(
-            [NotNull] Action<TInput> sourceFunc,
-            [NotNull] params Action<TInput>[] actions)
+            [NotNull] Action<TInput> exp,
+            [NotNull] params Action<TInput>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
 
             return input =>
             {
-                sourceFunc(input);
-                actions.For(item => item(input));
+                exp(input);
+                exps.For(item => item(input));
             };
         }
 
@@ -79,20 +79,20 @@ namespace CkTools.FP
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="funcs"></param>
+        /// <param name="exp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Pipe<TInput, TResult>(
-            [NotNull] Func<TInput, TResult> sourceFunc,
-            [NotNull] params Func<TResult, TResult>[] funcs)
+            [NotNull] Func<TInput, TResult> exp,
+            [NotNull] params Func<TResult, TResult>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            funcs.CheckNullWithException(nameof(funcs));
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
 
             return t =>
             {
-                TResult tempResult = sourceFunc(t);
-                funcs.For(item => tempResult = item(tempResult));
+                TResult tempResult = exp(t);
+                exps.For(item => tempResult = item(tempResult));
                 return tempResult;
             };
         }
@@ -102,20 +102,20 @@ namespace CkTools.FP
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
+        /// <param name="exp"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Pipe<TInput, TResult>(
-            [NotNull] Func<TInput, TResult> sourceFunc,
-            [NotNull] params Action<TResult>[] actions)
+            [NotNull] Func<TInput, TResult> exp,
+            [NotNull] params Action<TResult>[] exps)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
 
             return input =>
             {
-                TResult tempResult = sourceFunc(input);
-                actions.For(item => item(tempResult));
+                TResult tempResult = exp(input);
+                exps.For(item => item(tempResult));
 
                 return tempResult;
             };
@@ -127,16 +127,16 @@ namespace CkTools.FP
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TCenter"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
+        /// <param name="exp"></param>
         /// <param name="func"></param>
         /// <returns></returns>
         public static Func<TInput, TResult> Pipe<TInput, TCenter, TResult>(
-          [NotNull] Func<TInput, TCenter> sourceFunc,
+          [NotNull] Func<TInput, TCenter> exp,
           [NotNull] Func<TCenter, TResult> func)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
+            exp.CheckNullWithException(nameof(exp));
             func.CheckNullWithException(nameof(func));
-            return t => func(sourceFunc(t));
+            return t => func(exp(t));
         }
 
         #endregion 1个入参

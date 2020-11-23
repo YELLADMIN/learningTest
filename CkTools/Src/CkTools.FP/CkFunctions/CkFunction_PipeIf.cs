@@ -26,18 +26,34 @@ namespace CkTools.FP
         /// 管道
         /// </summary>
         /// <Value>
-        /// <para><paramref name="isExecute"/>：判断是否执行，返回true为执行 </para>
-        /// <para><paramref name="func"/>：将要执行的处理 </para>
+        /// <para><paramref name="exp"/>：将要执行的处理 </para>
+        /// <para><paramref name="judgeExp"/>：判断是否执行，返回true为执行 </para>
         /// </Value>
         /// <typeparam name="TInput">可传递任意类型</typeparam>
         /// <returns></returns>
         public static Func<TInput, TInput> PipeIf<TInput>(
-            [NotNull] Func<TInput, TInput> func,
-            [NotNull] Func<TInput, bool> isExecute)
+            [NotNull] Func<TInput, TInput> exp,
+            [NotNull] Func<TInput, bool> judgeExp)
         {
-            func.CheckNullWithException(nameof(func));
-            isExecute.CheckNullWithException(nameof(isExecute));
-            return CkFunctions.If<TInput, TInput>(t => t, func, isExecute);
+            exp.CheckNullWithException(nameof(exp));
+            judgeExp.CheckNullWithException(nameof(judgeExp));
+            return CkFunctions.If<TInput, TInput>(t => t, exp, judgeExp);
+        }
+
+        /// <summary>
+        /// 管道
+        /// </summary>
+        /// <Value>
+        /// <para><paramref name="exp"/>：将要执行的处理 </para>
+        /// <para><paramref name="judgeExp"/>：判断是否执行，返回true为执行 </para>
+        /// </Value>
+        /// <typeparam name="TInput">可传递任意类型</typeparam>
+        /// <returns></returns>
+        public static Func<TInput, TInput> PipeIf<TInput>(
+            [NotNull] Func<TInput, TInput> exp,
+            [NotNull] Func<bool> judgeExp)
+        {
+            return CkFunctions.PipeIf<TInput>(exp, t => judgeExp());
         }
 
         #endregion Fun - 1入参 1出参

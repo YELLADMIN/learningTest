@@ -14,20 +14,20 @@ namespace CkTools.FP
         /// <typeparam name="TInput"></typeparam>
         /// <typeparam name="TCenter"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="selector">选择器，选择执行第几个函数,索引从0开始</param>
-        /// <param name="funcArray">函数数组</param>
+        /// <param name="exp"></param>
+        /// <param name="selectExp">选择器，选择执行第几个函数,索引从0开始</param>
+        /// <param name="expArray">函数数组</param>
         /// <returns></returns>
         public static Func<TInput, TResult> Switch<TInput, TCenter, TResult>(
-          [NotNull] Func<TInput, TCenter> sourceFunc,
-          [NotNull] Func<TCenter, byte> selector,
-          [NotNull] params Func<TCenter, TResult>[] funcArray)
+          [NotNull] Func<TInput, TCenter> exp,
+          [NotNull] Func<TCenter, byte> selectExp,
+          [NotNull] params Func<TCenter, TResult>[] expArray)
         {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            selector.CheckNullWithException(nameof(selector));
-            funcArray.CheckNullWithException(nameof(funcArray));
+            exp.CheckNullWithException(nameof(exp));
+            selectExp.CheckNullWithException(nameof(selectExp));
+            expArray.CheckNullWithException(nameof(expArray));
 
-            return t => sourceFunc(t).Pipe(c => funcArray[selector(c)](c));
+            return t => exp(t).Pipe(c => expArray[selectExp(c)](c));
         }
     }
 }
