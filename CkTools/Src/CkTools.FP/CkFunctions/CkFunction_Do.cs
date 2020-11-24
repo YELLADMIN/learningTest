@@ -9,9 +9,28 @@ namespace CkTools.FP
     /// </summary>
     public static partial class CkFunctions
     {
-        #region 1个参数
+        #region Action - 0入参 0出参
 
-        #region Action
+        /// <summary>
+        /// 管道
+        /// </summary>
+        /// <param name="exp"></param>
+        /// <param name="exps"></param>
+        /// <returns></returns>
+        public static Action Do(
+            [NotNull] Action exp,
+            [NotNull] params Action[] exps)
+        {
+            exp.CheckNullWithException(nameof(exp));
+            exps.CheckNullWithException(nameof(exps));
+
+            exps.For(t => exp += t);
+            return exp;
+        }
+
+        #endregion Action - 0入参 0出参
+
+        #region Action - 1入参 0出参
 
         /// <summary>
         /// 管道
@@ -47,57 +66,59 @@ namespace CkTools.FP
             return exp;
         }
 
-        #endregion Action
+        #endregion Action - 1入参 0出参
 
-        #region Func
+        #region 1个参数
 
-        /// <summary>
-        /// 管道
-        /// </summary>
-        /// <typeparam name="TInput"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        public static Func<TInput, TResult> Do<TInput, TResult>(
-            [NotNull] Func<TInput, TResult> sourceFunc,
-            [NotNull] Action<TResult> action)
-        {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            action.CheckNullWithException(nameof(action));
+        //#region Func
 
-            return t =>
-            {
-                TResult result = sourceFunc(t);
-                action(result);
-                return result;
-            };
-        }
+        ///// <summary>
+        ///// 管道
+        ///// </summary>
+        ///// <typeparam name="TInput"></typeparam>
+        ///// <typeparam name="TResult"></typeparam>
+        ///// <param name="sourceFunc"></param>
+        ///// <param name="action"></param>
+        ///// <returns></returns>
+        //public static Func<TInput, TResult> Do<TInput, TResult>(
+        //    [NotNull] Func<TInput, TResult> sourceFunc,
+        //    [NotNull] Action<TResult> action)
+        //{
+        //    sourceFunc.CheckNullWithException(nameof(sourceFunc));
+        //    action.CheckNullWithException(nameof(action));
 
-        /// <summary>
-        /// 管道
-        /// </summary>
-        /// <typeparam name="TInput"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="sourceFunc"></param>
-        /// <param name="actions"></param>
-        /// <returns></returns>
-        public static Func<TInput, TResult> Do<TInput, TResult>(
-            [NotNull] Func<TInput, TResult> sourceFunc,
-            [NotNull] params Action<TResult>[] actions)
-        {
-            sourceFunc.CheckNullWithException(nameof(sourceFunc));
-            actions.CheckNullWithException(nameof(actions));
+        //    return t =>
+        //    {
+        //        TResult result = sourceFunc(t);
+        //        action(result);
+        //        return result;
+        //    };
+        //}
 
-            return t =>
-            {
-                TResult result = sourceFunc(t);
-                actions.For(item => item(result));
-                return result;
-            };
-        }
+        ///// <summary>
+        ///// 管道
+        ///// </summary>
+        ///// <typeparam name="TInput"></typeparam>
+        ///// <typeparam name="TResult"></typeparam>
+        ///// <param name="sourceFunc"></param>
+        ///// <param name="actions"></param>
+        ///// <returns></returns>
+        //public static Func<TInput, TResult> Do<TInput, TResult>(
+        //    [NotNull] Func<TInput, TResult> sourceFunc,
+        //    [NotNull] params Action<TResult>[] actions)
+        //{
+        //    sourceFunc.CheckNullWithException(nameof(sourceFunc));
+        //    actions.CheckNullWithException(nameof(actions));
 
-        #endregion Func
+        //    return t =>
+        //    {
+        //        TResult result = sourceFunc(t);
+        //        actions.For(item => item(result));
+        //        return result;
+        //    };
+        //}
+
+        //#endregion Func
 
         #endregion 1个参数
     }

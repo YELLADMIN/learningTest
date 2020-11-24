@@ -10,18 +10,18 @@ namespace System
     {
         #region 0个入参
 
-        /// <summary>
-        /// 管道
-        /// </summary>
-        /// <param name="sourceExp"></param>
-        /// <param name="exps"></param>
-        /// <returns></returns>
-        public static Action Pipe(
-            [NotNull] this Action sourceExp,
-            [NotNull] params Action[] exps)
-        {
-            return CkFunctions.Pipe(sourceExp, exps);
-        }
+        ///// <summary>
+        ///// 管道
+        ///// </summary>
+        ///// <param name="sourceExp"></param>
+        ///// <param name="exps"></param>
+        ///// <returns></returns>
+        //public static Action Pipe(
+        //    [NotNull] this Action sourceExp,
+        //    [NotNull] params Action[] exps)
+        //{
+        //    return CkFunctions.Pipe(sourceExp, exps);
+        //}
 
         #endregion 0个入参
 

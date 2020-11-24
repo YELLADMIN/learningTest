@@ -9,24 +9,7 @@ namespace CkTools.FP
     /// </summary>
     public static partial class CkFunctions
     {
-        #region 0个入参
-
-        /// <summary>
-        /// 管道
-        /// </summary>
-        /// <param name="exp"></param>
-        /// <param name="exps"></param>
-        /// <returns></returns>
-        public static Action Pipe(
-            [NotNull] Action exp,
-            [NotNull] params Action[] exps)
-        {
-            exp.CheckNullWithException(nameof(exp));
-            exps.CheckNullWithException(nameof(exps));
-
-            exps.For(t => exp += t);
-            return exp;
-        }
+        #region Func - 0入参 1出参
 
         /// <summary>
         /// 管道
@@ -49,28 +32,30 @@ namespace CkTools.FP
             };
         }
 
-        #endregion 0个入参
+        #endregion Func - 0入参 1出参
 
-        #region 1个入参
+        #region Fun - 1入参 1出参
+
+        #endregion Fun - 1入参 1出参
 
         /// <summary>
         /// 管道
         /// </summary>
-        /// <typeparam name="TInput"></typeparam>
         /// <param name="exp"></param>
-        /// <param name="exps"></param>
+        /// <param name="actions"></param>
         /// <returns></returns>
-        public static Action<TInput> Pipe<TInput>(
-            [NotNull] Action<TInput> exp,
-            [NotNull] params Action<TInput>[] exps)
+        public static Func<TOutput> Pipe<TOutput>(
+            [NotNull] Func<TOutput> exp,
+            [NotNull] params Action<TOutput>[] exps)
         {
             exp.CheckNullWithException(nameof(exp));
             exps.CheckNullWithException(nameof(exps));
 
-            return input =>
+            return () =>
             {
-                exp(input);
-                exps.For(item => item(input));
+                TOutput result = exp();
+                exps.For(t => t(result));
+                return result;
             };
         }
 
@@ -138,7 +123,5 @@ namespace CkTools.FP
             func.CheckNullWithException(nameof(func));
             return t => func(exp(t));
         }
-
-        #endregion 1个入参
     }
 }
