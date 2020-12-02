@@ -1,4 +1,6 @@
-﻿1. AspectCore.Extensions.DependencyInjection  一个轻量级AOP框架 支持双平台，静态织入
+﻿开源项目集合：https://github.com/jasonhua95/awesome-dotnet-core
+
+1. AspectCore.Extensions.DependencyInjection  一个轻量级AOP框架 支持双平台，静态织入
 2. AutoMapper 一个映射实体的框架 支持双平台
 3. FluentValidation.AspNetCore	一个模型验证的框架，不只是DTO
 4. Gapotchenko.FX 基础库的加强库
