@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace System
 {
@@ -17,19 +16,64 @@ namespace System
             return source.BaseConvertOrDefalut(encoding.GetString, string.Empty);
         }
 
-        public static string[] BytesToHex(this byte[] bytes)
+        #region BytesToHexstring
+
+        /// <summary>
+        /// Byte[]数组转16进制字符串,无分割符
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="separator"></param>
+        /// <param name="uppercase"></param>
+        /// <returns></returns>
+        public static string BytesToHexstring(
+            this byte[] array,
+            ReadOnlySpan<char> separator,
+            bool uppercase = true)
         {
-            if (bytes.IsNullOrEmpty())
+            if (array.IsNullOrEmpty())
             {
-                return Array.Empty<string>();
+                return string.Empty;
             }
 
-            List<string> temp = new List<string>();
-            foreach (byte item in bytes)
+            string format = uppercase ? "X2" : "x2";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (byte item in array)
             {
-                temp.Add(item.ToString("X2"));
+                stringBuilder.Append(item.ToString(format));
+                stringBuilder.Append(separator);
             }
-            return temp.ToArray();
+            stringBuilder.Remove(stringBuilder.Length - separator.Length, separator.Length);//移除最后多加的分隔符
+
+            return stringBuilder.ToString();
         }
+
+        /// <summary>
+        /// Byte[]数组转16进制字符串,无分割符
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="uppercase"></param>
+        /// <returns></returns>
+        public static string BytesToHexstring(
+            this byte[] array,
+            bool uppercase = true)
+        {
+            return ByteExtensions.BytesToHexstring(array, ReadOnlySpan<char>.Empty, uppercase);
+        }
+
+        /// <summary>
+        /// Byte[]数组转16进制字符串,以" "分割
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="uppercase"></param>
+        /// <returns></returns>
+        public static string BytesToHexstringWithSeparator(
+            this byte[] array,
+            bool uppercase = true)
+        {
+            return ByteExtensions.BytesToHexstring(array, " ".AsSpan(), uppercase);
+        }
+
+        #endregion BytesToHexstring
     }
 }

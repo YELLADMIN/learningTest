@@ -1,10 +1,10 @@
-﻿using CkTools.BaseExtensions.ConstAndEnum;
-using CkTools.BaseExtensions.Helper;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using CkTools.BaseExtensions.ConstAndEnum;
+using CkTools.BaseExtensions.Helper;
+using Newtonsoft.Json;
 
 namespace System
 {
@@ -56,7 +56,7 @@ namespace System
             StringBuilder sb = new StringBuilder();
 
             //遍历分割后的字符串，把首字母大写
-            for (int i = 0; i < countryNameTempList.Count; i++)//froeach不能给枚举值赋值，所以用for
+            for (int i = 0 ; i < countryNameTempList.Count ; i++)//froeach不能给枚举值赋值，所以用for
             {
                 countryNameTempList[i][0] = char.ToUpper(countryNameTempList[i][0]);//首字母大写
                 sb.Append(countryNameTempList[i]);//添加到缓存变量里
@@ -494,6 +494,22 @@ namespace System
         public static bool IsNullOrEmpty(this string s)
         {
             return string.IsNullOrEmpty(s);
+        }
+
+        /// <summary>
+        /// 16进制的<see cref="string"/>转换为对应的字节数组,默认以" "分割
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static byte[] HexStringToBytes(this string s)
+        {
+            s = s.Replace(" ", "");
+            byte[] buffer = new byte[s.Length / 2];
+            for (int i = 0 ; i < s.Length ; i += 2)
+            {
+                buffer[i / 2] = Convert.ToByte(s.Substring(i, 2), 16);
+            }
+            return buffer;
         }
     }
 }
