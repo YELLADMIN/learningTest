@@ -19,12 +19,12 @@ namespace System
         #region BytesToHexstring
 
         /// <summary>
-        /// Byte[]数组转16进制字符串,无分割符
+        /// Byte[]数组转16进制字符串
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="separator"></param>
-        /// <param name="uppercase"></param>
-        /// <returns></returns>
+        /// <param name="array">需要求Hex值的数组</param>
+        /// <param name="separator">分隔符</param>
+        /// <param name="uppercase">是否转为大写</param>
+        /// <returns>字节数组的16进制表示</returns>
         public static string BytesToHexstring(
             this byte[] array,
             ReadOnlySpan<char> separator,
@@ -49,11 +49,11 @@ namespace System
         }
 
         /// <summary>
-        /// Byte[]数组转16进制字符串,无分割符
+        /// Byte[]数组转16进制字符串,无分隔符
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="uppercase"></param>
-        /// <returns></returns>
+        /// <param name="array">需要求Hex值的数组</param>
+        /// <param name="uppercase">是否转为大写</param>
+        /// <returns>字节数组的16进制表示</returns>
         public static string BytesToHexstring(
             this byte[] array,
             bool uppercase = true)
@@ -62,11 +62,11 @@ namespace System
         }
 
         /// <summary>
-        /// Byte[]数组转16进制字符串,以" "分割
+        /// Byte[]数组转16进制字符串,以" "分隔
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="uppercase"></param>
-        /// <returns></returns>
+        /// <param name="array">需要求Hex值的数组</param>
+        /// <param name="uppercase">是否转为大写</param>
+        /// <returns>字节数组的16进制表示</returns>
         public static string BytesToHexstringWithSeparator(
             this byte[] array,
             bool uppercase = true)
