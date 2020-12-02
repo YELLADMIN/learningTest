@@ -1,15 +1,15 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace System
+namespace System.Collections.Generic
 {
     /// <summary>
     /// Dictionary扩展类
     /// </summary>
     public static class DictionaryExtensions
     {
+        [return: MaybeNull]
         public static TValue GetOrDefault<TKey, TValue>(
             this IDictionary<TKey, TValue> valuePairs,
             TKey key,
@@ -189,39 +189,5 @@ namespace System
                 _ => new ReadOnlyDictionary<TKey, TValue>(source.ToDictionary(k => k.Key, v => v.Value)),
             };
         }
-
-        #region ConcurrentDictionary 线程安全方法
-
-        public static TValue GetOrAddFirstTry<TKey, TValue>(
-            this ConcurrentDictionary<TKey, TValue> dictionary,
-            TKey key,
-            Func<TKey, TValue> valueFactory) where TValue : class
-        {
-            if (dictionary.TryGetValue(key, out TValue value))
-            {
-                return value;
-            }
-            else
-            {
-                return dictionary.GetOrAdd(key, valueFactory);
-            }
-        }
-
-        public static TValue GetOrAddFirstTry<TKey, TValue>(
-            this ConcurrentDictionary<TKey, TValue> dictionary,
-            TKey key,
-            TValue newValue) where TValue : class
-        {
-            if (dictionary.TryGetValue(key, out TValue value))
-            {
-                return value;
-            }
-            else
-            {
-                return dictionary.GetOrAdd(key, newValue);
-            }
-        }
-
-        #endregion ConcurrentDictionary 线程安全方法
     }
 }
