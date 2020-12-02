@@ -4,12 +4,20 @@
     {
         #region 基础转换
 
+        #region To Long
+
         public static Func<string, long> stringToLong = System.Convert.ToInt64;
+
+        #endregion To Long
+
+        #region To Bool
 
         /// <summary>
         /// int转bool,大于0为true
         /// </summary>
         public static Func<int, bool> intToBool = t => t > 0;
+
+        #endregion To Bool
 
         #region To DateTimeOffset
 
