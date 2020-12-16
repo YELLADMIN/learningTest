@@ -8,6 +8,17 @@ namespace System
     public static class TaskExtensions
     {
         /// <summary>
+        /// ContinueWith，指定<see cref="TaskContinuationOptions"/>为<see cref="TaskContinuationOptions.AttachedToParent"/>
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="continuationAction"></param>
+        /// <returns></returns>
+        private static Task ContinueWithByAttached(Task task, Action<Task> continuationAction)
+        {
+            return task.ContinueWith(continuationAction, TaskContinuationOptions.AttachedToParent);
+        }
+
+        /// <summary>
         /// 注册异常处理委托,返回这段代码的<see cref="Task"/>
         /// </summary>
         /// <typeparam name="TTask"></typeparam>
@@ -17,7 +28,7 @@ namespace System
         public static Task HandleByException<TTask>(this TTask task, Action<Task> handle)
             where TTask : Task
         {
-            return task.ContinueWith(t =>
+            return TaskExtensions.ContinueWithByAttached(task, t =>
             {
                 if (t.IsFaulted)
                 {
@@ -36,7 +47,7 @@ namespace System
         public static Task HandleByException<TTask>(this TTask task, Action<Exception> handle)
             where TTask : Task
         {
-            return task.ContinueWith(t =>
+            return TaskExtensions.ContinueWithByAttached(task, t =>
             {
                 if (t.IsFaulted)
                 {
@@ -55,7 +66,7 @@ namespace System
         public static Task HandleByCanceled<TTask>(this TTask task, Action<Task> handle)
             where TTask : Task
         {
-            return task.ContinueWith(t =>
+            return TaskExtensions.ContinueWithByAttached(task, t =>
             {
                 if (t.IsCanceled)
                 {
