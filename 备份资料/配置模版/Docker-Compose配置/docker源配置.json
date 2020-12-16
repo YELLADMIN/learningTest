@@ -1,16 +1,14 @@
 {
- "registry-mirrors" : [
-   "https://mirror.ccs.tencentyun.com",
-   "http://registry.docker-cn.com",
-   "http://docker.mirrors.ustc.edu.cn",
-   "http://hub-mirror.c.163.com",
-   "https://5hh8258g.mirror.aliyuncs.com",
-   "https://mcr.azk8s.cn"
- ],
- "insecure-registries" : [
-   "registry.docker-cn.com",
-   "docker.mirrors.ustc.edu.cn"
- ],
- "debug" : true,
- "experimental" : true
+  "registry-mirrors": [
+    "https://5hh8258g.mirror.aliyuncs.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "http://hub-mirror.c.163.com",
+    "http://docker.mirrors.ustc.edu.cn"
+  ],
+  "insecure-registries": [
+    "registry.docker-cn.com",
+    "docker.mirrors.ustc.edu.cn"
+  ],
+  "debug": true,
+  "experimental": true
 }

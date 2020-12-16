@@ -8,7 +8,7 @@ services:
   rma-web:
     image: "10.16.78.88/mkpl/mkpl-rma-service:hotfix-v20.2.11217-20200325054452"
     ports:
-      - "8080" #端口 模式1:8080 主机随机->8080  模式2: 8080:8080 主机8080->8080 
+      - "8080" #端口 模式1:8080 主机随机->8080  模式2: 8081:8080 主机8081->8080 
     expose:
       - "80" #在不向主机发布端口的情况下公开端口 - 链接的服务只能访问这些端口。只能指定内部端口。 
    # network_mode: "bridge" #网络模式 bridge、host、none、service:[service name]

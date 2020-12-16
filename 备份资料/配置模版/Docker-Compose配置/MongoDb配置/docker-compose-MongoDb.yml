@@ -8,30 +8,37 @@
 version: '3.7'
 services:
   
-  mssql2019: #服务名字
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
-    container_name: "mongodb" #容器名默认是用上面写的服务名
-    restart: always #容器挂了后自动重启
+  mongodb: #服务名字
+    image: "mongo"
+    container_name: "mongodb"
+    restart: always
     ports:
-      - "1433:1433" #端口 模式1:8080 主机随机->8080  模式2: 8080:8080 主机8080->8080 
+      - "27099:27099" #端口 模式1:8080 主机随机->8080  模式2: 8080:8080 主机8080->8080 
+    command: mongod --port 27099
     environment: #设置容器内的环境变量 会覆盖镜像中的环境变量
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1234ABCD.
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/data/logs
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123.com
+      
     #expose:
       #- "80" #在不向主机发布端口的情况下公开端口 - 链接的服务只能访问这些端口。只能指定内部端口。 
     network_mode: "bridge" #网络模式 bridge、host、none、service:[service name]
     volumes: #卷配置 相当于配置硬盘
       - type: bind #安装类型 
-        source: ./sqlData
-        target: /tmp/sqlData
-    deploy: #部署配置
-        resources: #资源限制
-            limits: #配置极限允许的资源
-                cpus: '1'
-                memory: 1000M
-            reservations: #配置要申请的资源
-                cpus: '0.5'
-                memory: 200M
+        source: ./mongodb/data
+        target: /data/db
+      - type: bind #安装类型 
+        source: ./mongodb/logs
+        target: /data/logs
+    #deploy: #部署配置
+        #resources: #资源限制
+            #limits: #配置极限允许的资源
+                #cpus: '1'
+                #memory: 1000M
+            #reservations: #配置要申请的资源
+                #cpus: '0.5'
+                #memory: 200M
 
   #seller-web:
     #image: "10.16.78.88/marketplace/mkpl-seller-service:develop-20200320061732"
