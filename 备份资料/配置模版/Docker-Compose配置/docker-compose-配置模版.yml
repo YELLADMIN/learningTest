@@ -12,6 +12,7 @@ services:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     container_name: "mongodb" #容器名默认是用上面写的服务名
     restart: always #容器挂了后自动重启
+    command:   #启动时附加的命令
     ports:
       - "1433:1433" #端口 模式1:8080 主机随机->8080  模式2: 8080:8080 主机8080->8080 
     environment: #设置容器内的环境变量 会覆盖镜像中的环境变量

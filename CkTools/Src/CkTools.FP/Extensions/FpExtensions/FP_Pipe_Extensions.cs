@@ -27,19 +27,19 @@ namespace System
 
         #region 1个入参
 
-        /// <summary>
-        /// 管道
-        /// </summary>
-        /// <typeparam name="TInput"></typeparam>
-        /// <param name="sourceExp"></param>
-        /// <param name="exps"></param>
-        /// <returns></returns>
-        public static Action<TInput> Pipe<TInput>(
-            [NotNull] this Action<TInput> sourceExp,
-            [NotNull] params Action<TInput>[] exps)
-        {
-            return CkFunctions.Pipe(sourceExp, exps);
-        }
+        ///// <summary>
+        ///// 管道
+        ///// </summary>
+        ///// <typeparam name="TInput"></typeparam>
+        ///// <param name="sourceExp"></param>
+        ///// <param name="exps"></param>
+        ///// <returns></returns>
+        //public static Action<TInput> Pipe<TInput>(
+        //    [NotNull] this Action<TInput> sourceExp,
+        //    [NotNull] params Action<TInput>[] exps)
+        //{
+        //    return CkFunctions.Pipe(sourceExp, exps);
+        //}
 
         #endregion 1个入参
 

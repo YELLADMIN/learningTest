@@ -15,7 +15,7 @@ namespace CkTools.FP
         /// 管道
         /// </summary>
         /// <param name="exp"></param>
-        /// <param name="actions"></param>
+        /// <param name="exps"></param>
         /// <returns></returns>
         public static Func<TOutput> Pipe<TOutput>(
             [NotNull] Func<TOutput> exp,
@@ -38,26 +38,26 @@ namespace CkTools.FP
 
         #endregion Fun - 1入参 1出参
 
-        /// <summary>
-        /// 管道
-        /// </summary>
-        /// <param name="exp"></param>
-        /// <param name="actions"></param>
-        /// <returns></returns>
-        public static Func<TOutput> Pipe<TOutput>(
-            [NotNull] Func<TOutput> exp,
-            [NotNull] params Action<TOutput>[] exps)
-        {
-            exp.CheckNullWithException(nameof(exp));
-            exps.CheckNullWithException(nameof(exps));
+        ///// <summary>
+        ///// 管道
+        ///// </summary>
+        ///// <param name="exp"></param>
+        ///// <param name="exps"></param>
+        ///// <returns></returns>
+        //public static Func<TOutput> Pipe<TOutput>(
+        //    [NotNull] Func<TOutput> exp,
+        //    [NotNull] params Action<TOutput>[] exps)
+        //{
+        //    exp.CheckNullWithException(nameof(exp));
+        //    exps.CheckNullWithException(nameof(exps));
 
-            return () =>
-            {
-                TOutput result = exp();
-                exps.For(t => t(result));
-                return result;
-            };
-        }
+        //    return () =>
+        //    {
+        //        TOutput result = exp();
+        //        exps.For(t => t(result));
+        //        return result;
+        //    };
+        //}
 
         /// <summary>
         /// 管道
