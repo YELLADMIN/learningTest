@@ -1,0 +1,11 @@
+            services.AddHttpClient("test")
+            .ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                return new HttpClientHandler()
+                {
+                    // AllowAutoRedirect = false,
+                    // UseDefaultCredentials = true,
+                    Proxy = new WebProxy("127.0.0.1:10240"),
+                    UseProxy = true
+                };
+            });
