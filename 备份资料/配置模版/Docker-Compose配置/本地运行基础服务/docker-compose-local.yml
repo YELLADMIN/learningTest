@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   localNginx: #服务名字
-    image: "nginx"
+    image: "nginx:1.19.6"
     container_name: "localNginx"
     network_mode: "bridge"
     volumes: #卷配置 相当于配置硬盘
@@ -11,7 +11,7 @@ services:
         target: "/etc/nginx/nginx.conf"
         read_only: true #将卷设置为只读
       - type: bind #安装类型 
-        source: "./nginxhtml"
+        source: "D:/项目/公司项目/河长制/河长制系统2.0/HZZ2.0/GZHZZ/web/RiverChief.Web-GZZ/WebClient/dist"
         target: "/etc/nginx/html"
       - type: bind #安装类型 
         source: "./nginxlogs"
@@ -24,7 +24,7 @@ services:
       #- rma-web
     ports:
       - "8055:8055"
-
+    command: [nginx-debug, '-g', 'daemon off;'] # 调试模式运行
 
       
   localMysql:

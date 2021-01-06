@@ -13,3 +13,6 @@ redis
 
 mysql:
 server=139.9.235.114;port=3306;Database=nybusiness;Uid=root;Pwd=scwj.123;CharSet=utf8;Allow Zero Datetime=true;Pooling=true;Connection Lifetime=600;Max Pool Size=40;Min Pool Size=1;Connection Reset=false;Allow User Variables=True
+
+mongodb:
+mongodb://root:scwj.123@172.27.112.30:27017

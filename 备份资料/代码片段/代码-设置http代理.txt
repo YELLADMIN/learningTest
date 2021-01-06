@@ -9,3 +9,10 @@
                     UseProxy = true
                 };
             });
+
+
+var httpClientHandler=new HttpClientHandler()
+{
+Proxy = new WebProxy($"http://{ip}:{port}")
+};
+var httpClient=new HttpClient(httpClientHandler);

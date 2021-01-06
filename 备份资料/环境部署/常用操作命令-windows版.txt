@@ -1,0 +1,3 @@
+netstat -t -n -b  #查看端口绑定+程序名
+
+tasklist | findstr ng    #查看当前运行的程序 包含'ng的'

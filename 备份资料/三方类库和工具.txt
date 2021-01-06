@@ -51,6 +51,9 @@
 48. EasyCaching 缓存组件，有多个提供程序
 49. Z.EntityFramework.Plus.EFCore ef的扩展库，包括过滤器，缓存，提前查询，批量操作等EF扩展功能。
 50. SharpCompress 纯C＃文件压缩操作库，支持unrar, un7zip, unzip, untar unbzip2, ungzip, unlzip
+51. norns 大腿写的一个AOP库，比AspectCore轻量一些
+52. Enums.NET 解决不同枚举操作之间的一些问题
+
 
 --工具
 1. 查看GC数据的工具：https://github.com/Microsoft/perfview#getting-perfview
