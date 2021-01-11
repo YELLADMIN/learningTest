@@ -1,7 +1,9 @@
 ﻿namespace System
 {
-    public static class TypeConvertDelegate
+    public static partial class TypeConvertDelegate
     {
+        //这个文件
+
         #region 基础转换
 
         #region To Long
