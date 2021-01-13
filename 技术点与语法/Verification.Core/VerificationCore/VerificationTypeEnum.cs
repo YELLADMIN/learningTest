@@ -54,6 +54,8 @@
         A33_快速判断Int是否存在数组,
         A34_使用DispatchProxy代理非公开接口,
         A35_ConfigureAwait配置True或是False,
+        A36_Task对比yield的协程,
+        A37_构建字符串速度测试,
 
         #endregion 技术点
 
