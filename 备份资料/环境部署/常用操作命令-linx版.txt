@@ -1,0 +1,5 @@
+unmae -srm				#查看linux内核版本
+hostnamestl				#查看内核版本
+ifconfig					#centos6.5 查看IP地址
+ip addr					#centeos7  查看IP地址
+ls | find *.json				#用ls+find查看文件 可以筛选文件夹
