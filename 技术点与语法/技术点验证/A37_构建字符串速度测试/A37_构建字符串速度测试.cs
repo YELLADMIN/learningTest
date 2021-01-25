@@ -11,6 +11,8 @@ namespace 技术点验证.A37_快速填0测试
     {
         public void Start(string[]? args)
         {
+            //结论见测试代码、测试个数处
+
             Type[] types = new Type[]
             {
                 typeof(BuildString)
